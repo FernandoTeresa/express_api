@@ -1,0 +1,117 @@
+[
+    {
+        "id": 1,
+        "title": "Farense é o maior da zona !!!!!",
+        "content": "Do esforço se faz a vitória, Que no tempo nos trará saudade, Duma página bela de história, Escrita p'la nossa vontade. Com os olhos postos no futuro, E a grandeza que o sonho nos traz, Mostraremos ao mundo as façanhas, De que a gente de faro é capaz. Cantaremos todos numa voz, À vitória farense, à vitória, Içaremos a tua bandeira, Brindaremos em tua memória, E para as gerações do futuro, À vitória farense, à vitória, Nunca mais murchará a semente, Do arrojo, da fama e da glória.",
+        "date": "2022-09-14",
+        "id_user": 4,
+        "user": {
+            "id": 4,
+            "first_name": "fefe",
+            "last_name": "oculinhos"
+        },
+        "comments": [
+            {
+                "id": 1,
+                "content": "nao gosto de futebol!!",
+                "date": "2022-09-30",
+                "id_post": 1,
+                "id_user": 1,
+                "user": {
+                    "id": 1,
+                    "first_name": "Zé",
+                    "last_name": "dos Cães"
+                }
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "title": "Private msg @buninho",
+        "content": "Bora fumar mó !!!!",
+        "date": "2022-09-23",
+        "user": {
+            "id": 1,
+            "first_name": "Zé",
+            "last_name": "dos Cães"
+        },
+        "comments": [
+            {
+                "id": 1,
+                "content": "bora eu levo os filtros que andas a extorquir-me lol ",
+                "date": "2022-09-13",
+                "id_post": 2,
+                "id_user": 3,
+                "user": {
+                    "id": 3,
+                    "first_name": "Buninho",
+                    "last_name": "Cabeludo"
+                }
+            }
+        ]
+    },
+    {
+        "id": 3,
+        "title": "CABELO !!?!??!?",
+        "content": "pah podem me dizer um cabeleireiro para eu cortar as pontas? atenção:cabeleireiro de mulheres porque os homens não sabem mexer no meu cabelinho",
+        "date": "2022-09-08",
+        "user": {
+            "id": 3,
+            "first_name": "Buninho",
+            "last_name": "Cabeludo"
+        },
+        "comments": [
+            {
+                "id": 1,
+                "content": "vou falar com o dudu ele tem um bom cabeleireiro:P",
+                "date": "2022-09-29",
+                "id_post": 3,
+                "id_user": 4,
+                "user": {
+                    "id": 4,
+                    "first_name": "Fefe",
+                    "last_name": "Oculinhos"
+                }
+            }
+        ]
+    },
+    {
+        "id": 4,
+        "title": "PUReza !!!",
+        "content": "maltinha javascript puro é que é !!! o grau de pureza é extremamente elevado, O K !!!!!",
+        "date": "2022-09-26",
+        "user": {
+            "id": 2,
+            "first_name": "Dudu",
+            "last_name": "dos Montes"
+        },
+        "comments": [
+            {
+                "id": 1,
+                "content": "AHAHAHHA pureza foi aquilo que fumaste lol ",
+                "date": "2022-09-30",
+                "id_post": 4,
+                "id_user": 1,
+                "user": {
+                    "id": 1,
+                    "first_name": "Zé",
+                    "last_name": "dos Cães"
+                }
+
+            },
+
+            {
+                "id": 2,
+                "content": "Confirma-se tás todo apanhado :P ",
+                "date": "2022-09-30",
+                "id_post": 4,
+                "id_user": 3,
+                "user": {
+                    "id": 3,
+                    "first_name": "Buninho",
+                    "last_name": "Cabeludo"
+                }
+            }
+        ]
+    }
+]
