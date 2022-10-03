@@ -1,5 +1,6 @@
 const express = require("express");
-const data = require("./mock-obj-post.json");
+const postdata = require("./mock-obj-post.json");
+const userdata = require("./mock-user.json");
 const bodyParser = require( 'body-parser');
 
 var app = express();
@@ -16,9 +17,12 @@ app.use(function (req, res, next) {
     next();
 });
 app.get("/posts", (req, res, next) => {
-    return res.send(200, data); 
+    return res.send(200, postdata); 
    });
 
+app.get("/users", (req, res, next) => {
+    return res.send(200, userdata)
+});
 
 app.listen(3000, () => {
  console.log("Server running on port 3000");

@@ -1,0 +1,25 @@
+[
+    {
+        "id": 1,
+        "first_name": "Zé",
+        "last_name": "dos Cães"
+    },
+
+    {
+        "id": 2,
+        "first_name": "Dudu",
+        "last_name": "dos Montes"
+    },
+
+    {
+        "id": 3,
+        "first_name": "Buninho",
+        "last_name": "Cabeludo"
+    },
+    
+    {
+        "id": 4,
+        "first_name": "Fefe",
+        "last_name": "Oculinhos"
+    }
+]
