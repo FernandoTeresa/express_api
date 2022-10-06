@@ -24,6 +24,25 @@ app.get("/users", (req, res, next) => {
     return res.send(200, userdata)
 });
 
+
+app.post("/login", (req, res, next)=> {
+    let reqUsername = req.body.username;
+    if (reqUsername === undefined){
+        return res.send(401, 'Dont exist');
+    }
+
+    if(reqUsername === ''){
+        return res.send(401, 'empty field');
+    }
+
+    for(let i=0;i <userdata.length; i++){
+        if(userdata[i].username === reqUsername){
+            return res.send(200, userdata[i])
+        }
+    }
+    return res.send(401, 'Unauthorized')
+})
+
 app.listen(3000, () => {
  console.log("Server running on port 3000");
 });
