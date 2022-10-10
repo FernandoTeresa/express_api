@@ -6,6 +6,7 @@
         "first_name": "Zé",
         "last_name": "dos Cães"
     },
+
     {
         "id": 2,
         "username": "dudu",
@@ -13,6 +14,7 @@
         "first_name": "Dudu",
         "last_name": "dos Montes"
     },
+
     {
         "id": 3,
         "username": "buninho",
@@ -20,6 +22,7 @@
         "first_name": "Buninho",
         "last_name": "Cabeludo"
     },
+    
     {
         "id": 4,
         "username": "fefe",

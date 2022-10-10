@@ -97,7 +97,9 @@
                     "first_name": "Zé",
                     "last_name": "dos Cães"
                 }
+
             },
+
             {
                 "id": 2,
                 "content": "Confirma-se tás todo apanhado :P ",
@@ -111,19 +113,5 @@
                 }
             }
         ]
-    },
-    {
-        "title": "sdfsdfsdfsdf",
-        "content": "sdfsdfsdfsdf",
-        "id_user": 2,
-        "id": 5,
-        "date": "2022-10-10T17:05:19.559Z"
-    },
-    {
-        "title": "dasdasdasd",
-        "content": "adasdasasdasdasdsadas\ndas\nd\nas\ndas\nd\nas\ndasdasdasdas",
-        "id_user": 2,
-        "id": 6,
-        "date": "2022-10-10T17:08:52.042Z"
     }
 ]
