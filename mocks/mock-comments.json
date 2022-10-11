@@ -1,0 +1,37 @@
+[
+    {  
+        "id": 1,
+        "content": "nao gosto de futebol!!",
+        "date": "2022-09-30",
+        "id_post": 1,
+        "id_user": 1
+    },
+    {
+        "id": 2,
+        "content": "bora eu levo os filtros que andas a extorquir-me lol ",
+        "date": "2022-09-13",
+        "id_post": 2,
+        "id_user": 3
+    },
+    {
+        "id": 3,
+        "content": "vou falar com o dudu ele tem um bom cabeleireiro:P",
+        "date": "2022-09-29",
+        "id_post": 3,
+        "id_user": 4
+    },
+    {
+        "id": 4,
+        "content": "AHAHAHHA pureza foi aquilo que fumaste lol ",
+        "date": "2022-09-30",
+        "id_post": 4,
+        "id_user": 1
+    },
+    {
+        "id": 5,
+        "content": "Confirma-se tás todo apanhado :P ",
+        "date": "2022-09-30",
+        "id_post": 4,
+        "id_user": 3
+    }
+]

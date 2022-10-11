@@ -1,6 +1,7 @@
 const express = require("express");
-const postdata = require("./mock-obj-post.json");
-const userdata = require("./mock-user.json");
+const postdata = require("./mocks/mock-obj-post.json");
+const userdata = require("./mocks/mock-user.json");
+const commentdata = require("./mocks/mock-comments.json");
 const bodyParser = require('body-parser');
 const fs = require('fs');
 
@@ -27,7 +28,7 @@ app.get("/users", (req, res, next) => {
 
 
 app.post("/login", (req, res, next) => {
-    var userData = fs.readFileSync("./mock-user.json", { encoding: 'utf8', flag: 'r' });
+    var userData = fs.readFileSync("./mocks/mock-user.json", { encoding: 'utf8', flag: 'r' });
     userData = JSON.parse(userData);
 
     let reqUsername = req.body.username;
@@ -49,7 +50,7 @@ app.post("/login", (req, res, next) => {
 
 
 app.post("/registerUser", (req, res, next) => {
-    var userData = fs.readFileSync("./mock-user.json", { encoding: 'utf8', flag: 'r' });
+    var userData = fs.readFileSync("./mocks/mock-user.json", { encoding: 'utf8', flag: 'r' });
     userData = JSON.parse(userData);
 
     let user = req.body;
@@ -73,7 +74,7 @@ app.post("/registerUser", (req, res, next) => {
     user.id = Math.max(...userData.map(param => param.id + 1));
     userData.push(user);
 
-    fs.writeFile("./mock-user.json", JSON.stringify(userData,null,4), (err) => {
+    fs.writeFile("./mocks/mock-user.json", JSON.stringify(userData,null,4), (err) => {
         if (err) {
             console.log(err);
             return res.status(404).send("error");
@@ -84,50 +85,70 @@ app.post("/registerUser", (req, res, next) => {
     })
 });
 
-app.post("/listPost", (req, res, next) => {
 
-    var postData = fs.readFileSync("./mock-obj-post.json", { encoding: 'utf8', flag: 'r' });
-    postData = JSON.parse(postData);  
+function getComments(){
+    // le o ficheiro json e guarda na variavel commentData
+    var commentData = fs.readFileSync("./mocks/mock-comments.json", {encoding: 'utf8', flag: 'r'});
+    //converte o que esta na variavel commentData num objecto que por sua vez é guardado na mesma variavel
+    commentData = JSON.parse(commentData);
+    // guarda na variavel users a funçao getUsers que por sua vez é convertido num objecto users com o conteudo 
+    //do objecto userData
+    let users = getUsers();
 
-    let post = req.body;
-
-    console.log(post);
-
-    if (post.id === undefined || post.id === ''){
-        return res.status(401).send('Id dont exist or empty field');
+    //vai iterar o objecto commentData e em cada indice vai procurar o id.user no objecto users o id correspondente 
+    for (let i=0; i<commentData.length; i++){
+        let user = users.find(elem=> elem.id === commentData[i].id_user);
+        //vai criar uma nova propriedade no objecto commentData que por sua vez guarda o que encontrou na propriedade user
+        commentData[i].user = user;
     }
+    // retora o objecto com a sua nova propriedade 
+    return commentData;
+
+}
+
+function getPosts(){
+    var postData = fs.readFileSync("./mocks/mock-obj-post.json", { encoding: 'utf8', flag: 'r' });
+    postData = JSON.parse(postData);
+    let users = getUsers();
+
+    let comments = getComments();
+
+    for(let i=0;i<postData.length;i++){
+        let user = users.find(elem => elem.id === postData[i].id_user);
+        postData[i].user = user;
+
+        let comment = comments.filter(elem=>elem.id_post === postData[i].id)
+        postData[i].comments = comment;
+    }
+
+    return postData;
+}
+
+function getUsers(){
+    var userData = fs.readFileSync("./mocks/mock-user.json", { encoding: 'utf8', flag: 'r' });
+    userData = JSON.parse(userData);
+    return userData;
+}
+
+app.get("/listPost", (req, res, next) => {
+
     
-    if (post.title === undefined || post.title === ''){
-        return res.status(401).send('Title dont exist or empty field');
-    }
+    let posts = getPosts(); 
 
-    if (post.content === undefined){
-        return res.status(401).send('Content dont exist');
-    }
+    return res.json(posts);
 
-    if (post.id_user === undefined || post.id_user === ''){
-        return res.status(401).send('User dont exist or empty field');
-    }
-
-    for (let i =0; i<postData.length; i++){
-        if (postData[i].id === post.id){
-            return res.status(200).send(postData[i]);
-        }
-    }
-
-    return res.status(401).send('Unauthorized')
+    //return res.status(401).send('Unauthorized')
 });
 
 
 app.post("/addNewPosts", (req, res, next)=>{
-    var postData = fs.readFileSync("./mock-obj-post.json", { encoding: 'utf8', flag: 'r' });
+    var postData = fs.readFileSync("./mocks/mock-obj-post.json", { encoding: 'utf8', flag: 'r' });
     postData = JSON.parse(postData);  
 
-    var userData = fs.readFileSync("./mock-user.json", { encoding: 'utf8', flag: 'r' });
+    var userData = fs.readFileSync("./mocks/mock-user.json", { encoding: 'utf8', flag: 'r' });
     userData = JSON.parse(userData);
 
     let post = req.body;
-    console.log(post);
 
     if (post.title === undefined || post.title === ""){
         return res.status(400).send("missing title");
@@ -137,7 +158,7 @@ app.post("/addNewPosts", (req, res, next)=>{
         return res.status(400).send("missing user id");
     }
 
-    let user = userData.find(elem => elem.id === post.id_user)
+    let user = userData.find(elem => elem.id === post.id_user);
 
     if (!user){
         return res.status(403).send("User dont exist");
@@ -153,7 +174,7 @@ app.post("/addNewPosts", (req, res, next)=>{
 
     postData.push(post);
 
-    fs.writeFile("./mock-obj-post.json", JSON.stringify(postData,null,4), (err) => {
+    fs.writeFile("./mocks/mock-obj-post.json", JSON.stringify(postData,null,4), (err) => {
         if (err) {
             console.log(err);
             return res.status(404).send("error");
@@ -164,12 +185,28 @@ app.post("/addNewPosts", (req, res, next)=>{
     })
 });
 
+
+app.get("/listPosts/:id", (req, res, next)=>{
+
+    let posts = getPosts();
+    if (posts.id_user){
+        posts = [];
+    }
+    let post = posts.filter(elem => elem.id_user === parseInt(req.params['id']))
+
+    return res.status(200).send(post);
+
+});
+
 app.listen(3000, () => {
     console.log("Server running on port 3000");
 });
 
-
 /* 
-separar as mocks comentarios dos posts
+/listPost/{{id-user}}
+
+mostrar unicamente os posts 
+
+
 
 */
