@@ -26,5 +26,12 @@
         "password": "12345",
         "first_name": "Fefe",
         "last_name": "Oculinhos"
+    },
+    {
+        "username": "fernando",
+        "password": "12345",
+        "first_name": "fernando",
+        "last_name": "teresa",
+        "id": 5
     }
 ]
