@@ -21,11 +21,43 @@
         "id_user": 3
     },
     {
-        "title": "sdfsdfsd",
-        "content": "sdfsdfsdfsdfsdf",
+        "title": "adasdasdasd",
+        "content": "sadasdasd",
         "comments": [],
         "id_user": 2,
         "id": 4,
-        "date": "2022-10-12T16:51:28.373Z"
+        "date": "2022-10-13T13:12:25.054Z"
+    },
+    {
+        "title": "asdasdas",
+        "content": "asdasdasdasd",
+        "comments": [],
+        "id_user": 2,
+        "id": 5,
+        "date": "2022-10-13T13:12:28.452Z"
+    },
+    {
+        "title": "dfgdfgdfg",
+        "content": "dfghdfgdfgdfg",
+        "comments": [],
+        "id_user": 2,
+        "id": 6,
+        "date": "2022-10-13T13:13:32.033Z"
+    },
+    {
+        "title": "ddfgdfgdfg",
+        "content": "dfgdfgdfgdfgdfg",
+        "comments": [],
+        "id_user": 2,
+        "id": 7,
+        "date": "2022-10-13T13:13:36.006Z"
+    },
+    {
+        "title": "dfgdfgdf",
+        "content": "dfgdfgdf",
+        "comments": [],
+        "id_user": 2,
+        "id": 8,
+        "date": "2022-10-13T13:14:20.113Z"
     }
 ]

@@ -1,5 +1,5 @@
 [
-    {  
+    {
         "id": 1,
         "content": "nao gosto de futebol!!",
         "date": "2022-09-30",
@@ -21,17 +21,69 @@
         "id_user": 4
     },
     {
-        "id": 4,
-        "content": "AHAHAHHA pureza foi aquilo que fumaste lol ",
-        "date": "2022-09-30",
-        "id_post": 4,
-        "id_user": 1
+        "id_user": 4,
+        "content": "batatas",
+        "id": 5,
+        "date": "2022-10-13T13:10:03.806Z"
     },
     {
+        "id_user": 4,
+        "content": "batatas",
         "id": 5,
-        "content": "Confirma-se tás todo apanhado :P ",
-        "date": "2022-09-30",
-        "id_post": 4,
-        "id_user": 3
+        "date": "2022-10-13T13:10:10.394Z"
+    },
+    {
+        "id_user": 4,
+        "content": "batatas",
+        "id": 5,
+        "date": "2022-10-13T13:10:29.471Z"
+    },
+    {
+        "id_user": 4,
+        "content": "batatas",
+        "id": 5,
+        "date": "2022-10-13T13:11:12.046Z"
+    },
+    {
+        "content": "sdfsdfsdf",
+        "id_user": 2,
+        "id_post": 7,
+        "date": "2022-10-13T13:13:42.194Z",
+        "id": 8
+    },
+    {
+        "content": "sdfsdfsdfsd",
+        "id_user": 2,
+        "id_post": 7,
+        "date": "2022-10-13T13:13:44.013Z",
+        "id": 8
+    },
+    {
+        "content": "sdfsdsdfsd",
+        "id_user": 2,
+        "id_post": 7,
+        "date": "2022-10-13T13:13:46.028Z",
+        "id": 8
+    },
+    {
+        "content": "sdgfsdfsdfsd",
+        "id_user": 2,
+        "id_post": 8,
+        "date": "2022-10-13T13:14:22.850Z",
+        "id": 9
+    },
+    {
+        "content": "sdfsdfsdf",
+        "id_user": 2,
+        "id_post": 8,
+        "date": "2022-10-13T13:14:24.563Z",
+        "id": 10
+    },
+    {
+        "content": "sdfsdfsd",
+        "id_user": 2,
+        "id_post": 8,
+        "date": "2022-10-13T13:14:26.088Z",
+        "id": 11
     }
 ]

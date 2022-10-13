@@ -19,6 +19,13 @@ app.use(function (req, res, next) {
     next();
 });
 
+app.use(function (req, res, next) {
+    if (req.method != "OPTIONS") {
+        console.log("»»» [REQUEST]: ","origin: ", req.ip," path: ", req.url, " METHOD: ", req.method," «««" );
+    }
+
+    next();
+});
 //quando é feita uma solicitação get ao endpoint /posts
 //é enviado um status 200 e os dados contidos no json postdata
 app.get("/posts", (req, res, next) => {
@@ -148,17 +155,20 @@ function getPosts(){
 
     //vai iterar o array de objetos postData
     for(let i=0;i<postData.length;i++){
-        //vai procurar em cada posiçao do objeto postData na propriedade id_user
-        //qual coincide com o id do user
-        let user = users.find(elem => elem.id === postData[i].id_user);
-        //vai criar uma nova propriedade user e o que encontrou vai guardar dentro dessa propriedade
-        postData[i].user = user;
+        
+        if (postData[i].id != null || postData[i].id != undefined){
+            //vai procurar em cada posiçao do objeto postData na propriedade id_user
+            //qual coincide com o id do user
+            let user = users.find(elem => elem.id === postData[i].id_user);
+            //vai criar uma nova propriedade user e o que encontrou vai guardar dentro dessa propriedade
+            postData[i].user = user;
 
-        //vai procurar em cada posiçao do objeto postData na propriedade id
-        //qual coincide com o id do id_post nesse comentario
-        let comment = comments.filter(elem=>elem.id_post === postData[i].id)
-        //vai criar uma nova propriedade comments e o que encontrou vai guardar dentro dessa propriedade
-        postData[i].comments = comment;
+            //vai procurar em cada posiçao do objeto postData na propriedade id
+            //qual coincide com o id do id_post nesse comentario
+            let comment = comments.filter(elem=>elem.id_post === postData[i].id)
+            //vai criar uma nova propriedade comments e o que encontrou vai guardar dentro dessa propriedade
+            postData[i].comments = comment;
+        }
     }
     //retorna todas as alteraçoes feitas
     return postData;
@@ -211,7 +221,6 @@ app.post("/addNewPosts", (req, res, next)=>{
     //depois guarda na variavel user
     let user = userData.find(elem => elem.id === post.id_user);
 
-    console.log(user);
     //se não encontrou envia erro com um status 403 e uma msg
     if (!user){
         return res.status(403).send("User dont exist");
@@ -239,10 +248,54 @@ app.post("/addNewPosts", (req, res, next)=>{
             //senao houver error envia um status 200 e o objeto post no tipo json no body do response  
             console.log("Success!! File written sucessfully");
             post.user = user;
-            console.log(post.length)
             return res.status(200).json(post);
         }
     })
+});
+
+app.post("/addNewComment", (req,res, next)=>{
+    var postData = fs.readFileSync("./mocks/mock-obj-post.json", { encoding: 'utf8', flag: 'r' });
+    postData = JSON.parse(postData);
+
+    var userData = fs.readFileSync("./mocks/mock-user.json", { encoding: 'utf8', flag: 'r' });
+    userData = JSON.parse(userData);
+
+    var commentData = fs.readFileSync("./mocks/mock-comments.json", { encoding: 'utf8', flag: 'r'});
+    commentData = JSON.parse(commentData);
+
+    let comment = req.body;
+
+    if (comment.content === undefined){
+        return res.status(400).send("missing content");
+    }
+
+    let post = postData.find(elem=>elem.id === comment.id_post);
+
+    let user = userData.find(elem => elem.id === comment.id_user);
+
+    if (!user){
+        return res.status(403).send("User dont exist");
+    }
+
+    comment.id = Math.max(...commentData.map(param => param.id + 1));
+    comment.date = new Date();
+    
+    commentData.push(comment);
+    console.log(commentData)
+ 
+    fs.writeFile("./mocks/mock-comments.json", JSON.stringify(commentData,null,4), (err) => {
+        //se existir erro retorna um status 404 e envia uma msg de erro
+        if (err) {
+            console.log(err);
+            return res.status(404).send("error");
+        } else {
+            //senao houver error envia um status 200 e o objeto post no tipo json no body do response  
+            console.log("Success!! File written sucessfully");
+            comment.id_user = user.id;
+            return res.status(200).json(true);
+        }
+    })
+
 });
 
 
@@ -272,16 +325,22 @@ app.post("/removePost/:id", (req, res, next)=>{
 
     let post = postData.filter(elem=>elem.id != parseInt(req.params['id']));
 
-   for (let i=0;i<commentData.length; i++){
-        //let comment = commentData.filter(elem=>elem.id_post ===  parseInt(req.params['id']) )
+    let comment = commentData.filter(elem=>elem.id_post !=  parseInt(req.params['id']) )
 
-        if (commentData[i].id_post === parseInt(req.params['id'])){
-            delete commentData[i];
+
+    fs.writeFile("./mocks/mock-comments.json", JSON.stringify(comment,null,2), (err)=>{
+        //se existir erro retorna um status 404 e envia uma msg de erro
+        if (err) {
+            console.log(err);
+            // nao é necessario devido se fizer o return sai da funçao
+            // return res.status(404).send("error");
+        } else {
+            // nao é necessario devido se fizer o return sai da funçao
+            //senao houver error envia um status 200 e o objeto post no tipo json no body do response  
+            console.log("Success!! File written sucessfully");
+            // return res.status(200).json(commentData);
         }
-   }
-   console.log(commentData)
-/*
-   //fs.writeFile("./mocks/mock-comments.json", JSON.stringify())
+    })
 
     fs.writeFile("./mocks/mock-obj-post.json", JSON.stringify(post,null,4), (err) => {
         //se existir erro retorna um status 404 e envia uma msg de erro
@@ -291,11 +350,10 @@ app.post("/removePost/:id", (req, res, next)=>{
         } else {
             //senao houver error envia um status 200 e o objeto post no tipo json no body do response  
             console.log("Success!! File written sucessfully");
-            return res.status(200).json(postData);
+            return res.status(200).json(post);
         }
     })
-    */
-})
+});
 
 app.listen(3000, () => {
     console.log("Server running on port 3000");
