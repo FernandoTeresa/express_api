@@ -38,6 +38,8 @@ app.get("/users", (req, res, next) => {
     return res.status(200).send(userdata)
 });
 
+//OK
+
 //quando é feita uma solicitação post ao endpoint /login
 app.post("/login", (req, res, next) => {
     //lê o ficheiro com modo sincrono
@@ -70,6 +72,9 @@ app.post("/login", (req, res, next) => {
     // senao cumprir as condiçoes retorna status 401 com a msg
     return res.status(401).send('Unauthorized')
 });
+
+
+//OK
 
 //quando é feita uma solicitação post ao endpoint /registerUser
 app.post("/registerUser", (req, res, next) => {
@@ -183,6 +188,8 @@ function getUsers(){
     return userData;
 }
 
+
+//OK
 app.get("/listPost", (req, res, next) => {
 
     //guarda na variavel users a funçao getUsers que por sua vez é convertido num
@@ -193,7 +200,7 @@ app.get("/listPost", (req, res, next) => {
     return res.json(posts);
 });
 
-
+//OK
 app.post("/addNewPosts", (req, res, next)=>{
     // le o ficheiro json e guarda na variavel postData
     var postData = fs.readFileSync("./mocks/mock-obj-post.json", { encoding: 'utf8', flag: 'r' });
@@ -253,6 +260,7 @@ app.post("/addNewPosts", (req, res, next)=>{
     })
 });
 
+//OK
 app.post("/addNewComment", (req,res, next)=>{
     var postData = fs.readFileSync("./mocks/mock-obj-post.json", { encoding: 'utf8', flag: 'r' });
     postData = JSON.parse(postData);
@@ -298,7 +306,7 @@ app.post("/addNewComment", (req,res, next)=>{
 
 });
 
-
+//OK
 app.get("/listPosts/:id", (req, res, next)=>{
 
     //a funçao getposts é convertido num objecto posts com o conteudo do objecto postData
@@ -316,6 +324,7 @@ app.get("/listPosts/:id", (req, res, next)=>{
 
 });
 
+//OK
 app.post("/removePost/:id", (req, res, next)=>{
     var postData = fs.readFileSync("./mocks/mock-obj-post.json", { encoding: 'utf8', flag: 'r' });
     postData = JSON.parse(postData);  
